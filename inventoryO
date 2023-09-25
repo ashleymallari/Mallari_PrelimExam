@@ -1,0 +1,8 @@
+192.168.56.105  ansible_python_interpreter=/usr/bin/python3
+192.168.56.105  python=python3 pip=pip3 java=
+
+192.168.56.111  ansible_python_interpreter=/usr/bin/python3
+192.168.56.111  
+
+ashleymallari@192.168.56.114  ansible_python_interpreter=/usr/bin/python3
+ashleymallari@192.168.56.114  apache_package=httpd php_package=php
