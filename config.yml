@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Install Python 3 and pip3
+      package:
+        name:
+          - python3
+          - python3-pip
+        state: latest
+
+    - name: Set pip3 as the default pip
+      pip:
+        name: pip
+        state: latest
+   
+    - name: Install Java open-jdk
+      apt:
+        name: openjdk-11-jdk
+        state: latest 
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"    
+    
+    - name: Install Java open-jdk
+      dnf: 
+        name: java-11-openjdk-devel
+        state: latest
+        update_cache: yes
+      when: ansible_distribution == "CentOS"
+
+    - name: Create Motd
+      copy: 
+        content: "{{ motd_text | default('Ansible Managed node by Mallari') }}"
+        dest: /etc/motd
+
+    - name: Create User
+      user: 
+        name: "{{ 'Mallari' }}"
+        state: present
